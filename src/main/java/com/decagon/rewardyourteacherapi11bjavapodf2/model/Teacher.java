@@ -1,7 +1,7 @@
 package com.decagon.rewardyourteacherapi11bjavapodf2.model;
 
 
-import com.decagon.rewardyourteacherapi.enums.SchoolType;
+import com.decagon.rewardyourteacherapi11bjavapodf2.enums.SchoolType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,17 +16,15 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@DiscriminatorValue(value = "teacher")
+@DiscriminatorValue(value = "Teacher")
 public class Teacher extends User{
 
-    private String teachingPeriod;
+    private String yearsOfService;
 
     @Enumerated(EnumType.STRING)
     private SchoolType schoolType;
 
-
-
-    private  String teacherIdUrl;
+    private  String valid_id;
 
     @OneToMany(mappedBy = "teacher")
     private List<Subject> subject;

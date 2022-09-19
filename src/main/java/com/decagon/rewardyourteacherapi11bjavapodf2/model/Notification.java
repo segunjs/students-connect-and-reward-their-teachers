@@ -1,6 +1,6 @@
 package com.decagon.rewardyourteacherapi11bjavapodf2.model;
 
-import com.decagon.rewardyourteacherapi.enums.NotificationType;
+import com.decagon.rewardyourteacherapi11bjavapodf2.enums.NotificationType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "notification")
+@Table(name = "notifications")
 public class Notification extends BaseClass{
 
     private String notificationBody;
