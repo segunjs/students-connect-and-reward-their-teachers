@@ -5,9 +5,6 @@ import com.decagon.rewardyourteacherapi11bjavapodf2.dto.PrincipalDto;
 import com.decagon.rewardyourteacherapi11bjavapodf2.dto.TeacherRegistrationDto;
 import com.decagon.rewardyourteacherapi11bjavapodf2.dto.UserDto;
 import com.decagon.rewardyourteacherapi11bjavapodf2.enums.Role;
-
-import com.decagon.rewardyourteacherapi11bjavapodf2.dto.*;
-import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.OAuth2AuthenticationException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserAlreadyExistException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserNotFoundException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.model.Subject;
@@ -121,5 +118,6 @@ public class AuthServiceImpl implements AuthService {
         String token = "Bearer " + jwtUtil.generateToken(auth2UserInfo.getEmail());
         return new ApiResponse<>("success", LocalDateTime.now(), new PrincipalDto(user.getId(), user.getName(), user.getEmail(), user.getRole(), jwtUtil.generateToken(auth2UserInfo.getEmail())));
     }
+
 
 }

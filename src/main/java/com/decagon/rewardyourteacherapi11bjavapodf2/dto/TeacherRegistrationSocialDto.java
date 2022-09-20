@@ -1,19 +1,16 @@
 package com.decagon.rewardyourteacherapi11bjavapodf2.dto;
 
 import com.decagon.rewardyourteacherapi11bjavapodf2.enums.SchoolType;
-import lombok.AllArgsConstructor;
+import com.decagon.rewardyourteacherapi11bjavapodf2.model.Subject;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class TeacherRegistrationDto extends UserDto{
-
+public class TeacherRegistrationSocialDto {
+    private String school;
     private String yearsOfService;
-    private List<String> subjectList;
+    private List<Subject> subjectList;
     private SchoolType schoolType;
     private String valid_id;
 }

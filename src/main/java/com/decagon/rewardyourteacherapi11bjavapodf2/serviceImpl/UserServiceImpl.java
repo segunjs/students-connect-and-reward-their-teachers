@@ -1,11 +1,20 @@
 package com.decagon.rewardyourteacherapi11bjavapodf2.serviceImpl;
 
+<<<<<<< HEAD
 import com.decagon.rewardyourteacherapi11bjavapodf2.dto.OAuth2UserInfo;
 import com.decagon.rewardyourteacherapi11bjavapodf2.enums.Role;
 import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserAlreadyExistException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.listeners.UserLogoutSuccessListener;
 import com.decagon.rewardyourteacherapi11bjavapodf2.model.Teacher;
 import com.decagon.rewardyourteacherapi11bjavapodf2.model.User;
+=======
+import com.decagon.rewardyourteacherapi11bjavapodf2.enums.Role;
+import com.decagon.rewardyourteacherapi11bjavapodf2.event.OnUserLogoutSuccessEvent;
+import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserAlreadyExistException;
+import com.decagon.rewardyourteacherapi11bjavapodf2.model.Teacher;
+import com.decagon.rewardyourteacherapi11bjavapodf2.model.User;
+import com.decagon.rewardyourteacherapi11bjavapodf2.pojos.OAuth2UserInfo;
+>>>>>>> origin/develop
 import com.decagon.rewardyourteacherapi11bjavapodf2.repository.UserRepository;
 import com.decagon.rewardyourteacherapi11bjavapodf2.response.ApiResponse;
 import com.decagon.rewardyourteacherapi11bjavapodf2.security.CustomUserDetails;
@@ -17,8 +26,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-
 import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -67,4 +76,15 @@ public class UserServiceImpl implements UserService {
 
         return new ApiResponse<>("success", LocalDateTime.now(), response);
     }
+
+   @Override
+   public ApiResponse<String> logoutUser(CustomUserDetails currentUser, String bearerToken){
+        String token = bearerToken.substring(7);
+        OnUserLogoutSuccessEvent logoutSuccessEvent = new OnUserLogoutSuccessEvent(currentUser.getUsername(), token);
+        applicationEventPublisher.publishEvent(logoutSuccessEvent);
+        String response = currentUser.getUsername() + " has successfully logged out from the system!";
+        return new ApiResponse<>("success",LocalDateTime.now(), response);
+    }
+
+
 }
