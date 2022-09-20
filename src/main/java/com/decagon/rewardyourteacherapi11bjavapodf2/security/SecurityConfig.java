@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -30,14 +31,21 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/**", "/api/v1/get", "/swagger-resources/**", "/swagger-ui/**", "/v2/api-docs")
+                .antMatchers("/api/v1/**", "/oauth2/login/**", "/api/logout", "/api/v1/get", "/swagger-resources/**", "/swagger-ui/**", "/v2/api-docs")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().logout().deleteCookies("JSESSIONID")
-                .and().logout().invalidateHttpSession(true);
+                .and().logout()
+                        .logoutUrl("/api/logout")
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
+                                        .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .logoutSuccessHandler((httpServletRequest, httpServletResponse, authentication) -> {
+                    httpServletResponse.setStatus(200);
+                });
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
