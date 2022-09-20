@@ -1,10 +1,8 @@
 package com.decagon.rewardyourteacherapi11bjavapodf2.serviceImpl;
 
-import com.decagon.rewardyourteacherapi11bjavapodf2.dto.LoginDTO;
-import com.decagon.rewardyourteacherapi11bjavapodf2.dto.PrincipalDto;
-import com.decagon.rewardyourteacherapi11bjavapodf2.dto.TeacherRegistrationDto;
-import com.decagon.rewardyourteacherapi11bjavapodf2.dto.UserDto;
+import com.decagon.rewardyourteacherapi11bjavapodf2.dto.*;
 import com.decagon.rewardyourteacherapi11bjavapodf2.enums.Role;
+import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.OAuth2AuthenticationException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserAlreadyExistException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserNotFoundException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.model.Subject;

@@ -1,20 +1,12 @@
 package com.decagon.rewardyourteacherapi11bjavapodf2.serviceImpl;
 
-<<<<<<< HEAD
 import com.decagon.rewardyourteacherapi11bjavapodf2.dto.OAuth2UserInfo;
 import com.decagon.rewardyourteacherapi11bjavapodf2.enums.Role;
 import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserAlreadyExistException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.listeners.UserLogoutSuccessListener;
 import com.decagon.rewardyourteacherapi11bjavapodf2.model.Teacher;
 import com.decagon.rewardyourteacherapi11bjavapodf2.model.User;
-=======
-import com.decagon.rewardyourteacherapi11bjavapodf2.enums.Role;
 import com.decagon.rewardyourteacherapi11bjavapodf2.event.OnUserLogoutSuccessEvent;
-import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserAlreadyExistException;
-import com.decagon.rewardyourteacherapi11bjavapodf2.model.Teacher;
-import com.decagon.rewardyourteacherapi11bjavapodf2.model.User;
-import com.decagon.rewardyourteacherapi11bjavapodf2.pojos.OAuth2UserInfo;
->>>>>>> origin/develop
 import com.decagon.rewardyourteacherapi11bjavapodf2.repository.UserRepository;
 import com.decagon.rewardyourteacherapi11bjavapodf2.response.ApiResponse;
 import com.decagon.rewardyourteacherapi11bjavapodf2.security.CustomUserDetails;
