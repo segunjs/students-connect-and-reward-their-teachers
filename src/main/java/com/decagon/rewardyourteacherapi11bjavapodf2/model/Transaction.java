@@ -1,6 +1,6 @@
 package com.decagon.rewardyourteacherapi11bjavapodf2.model;
 
-import com.decagon.rewardyourteacherapi.enums.TransactionType;
+import com.decagon.rewardyourteacherapi11bjavapodf2.enums.TransactionType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

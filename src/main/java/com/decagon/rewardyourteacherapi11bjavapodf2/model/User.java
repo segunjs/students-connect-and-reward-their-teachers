@@ -1,7 +1,7 @@
 package com.decagon.rewardyourteacherapi11bjavapodf2.model;
 
 
-import com.decagon.rewardyourteacherapi.enums.Role;
+import com.decagon.rewardyourteacherapi11bjavapodf2.enums.Role;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
