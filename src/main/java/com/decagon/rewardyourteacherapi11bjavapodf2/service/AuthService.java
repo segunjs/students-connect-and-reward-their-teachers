@@ -11,7 +11,11 @@ import com.decagon.rewardyourteacherapi11bjavapodf2.response.UserRegistrationRes
 import java.io.IOException;
 
 public interface AuthService {
+
     UserRegistrationResponse registerUser(UserDto userDto);
     UserRegistrationResponse registerTeacher(TeacherRegistrationDto teacherDto) throws IOException;
+
+
+    ApiResponse<PrincipalDto> loginUser(LoginDTO loginDTO);
 
 }

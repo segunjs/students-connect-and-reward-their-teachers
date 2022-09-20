@@ -37,12 +37,17 @@ import java.util.Optional;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+
     private final SubjectRepository subjectRepository;
 
     private final PasswordEncoder passwordEncoder;
+
+
+
     private final JwtUtil jwtUtil;
 
     private final AuthenticationManager authenticationManager;
+
 
     @Override
     public UserRegistrationResponse registerUser(UserDto userDto) {
@@ -89,5 +94,24 @@ public class AuthServiceImpl implements AuthService {
     }
 
 
+
+
+
+    @Override
+    public ApiResponse<PrincipalDto> loginUser(LoginDTO loginDTO) {
+        Authentication authenticate;
+        try {
+            authenticate = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
+            );
+        } catch (AuthenticationException ex) {
+            log.error(ex.getMessage());
+            throw new UserNotFoundException("invalid username or password");
+        }
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        User loggedInUser = userRepository.findUserByEmail(loginDTO.getEmail()).get();
+        return new ApiResponse<>("success" , LocalDateTime.now() , new PrincipalDto( loggedInUser.getId() , loggedInUser.getName() ,  loggedInUser.getEmail(), loggedInUser.getRole(), jwtUtil.generateToken(loginDTO.getEmail())));
+
+    }
 
 }
