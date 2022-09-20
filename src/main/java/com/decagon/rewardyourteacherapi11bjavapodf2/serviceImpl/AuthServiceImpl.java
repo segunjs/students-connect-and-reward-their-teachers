@@ -42,23 +42,11 @@ import java.util.Optional;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
-
     private final SubjectRepository subjectRepository;
-
     private final PasswordEncoder passwordEncoder;
-
-
-    private final SubjectRepository subjectRepository;
-
-    private final PasswordEncoder passwordEncoder;
-
 
     private final JwtUtil jwtUtil;
-
     private final AuthenticationManager authenticationManager;
-
-
-
 
     @Override
     public UserRegistrationResponse registerUser(UserDto userDto) {
@@ -101,13 +89,6 @@ public class AuthServiceImpl implements AuthService {
         }else{
             throw new UserAlreadyExistException("User already exist");
         }
-
-
-    }
-
-    @Override
-    public ApiResponse<PrincipalDto> loginUser(LoginDTO loginDTO) {
-
     }
 
     @Override
@@ -126,12 +107,6 @@ public class AuthServiceImpl implements AuthService {
         User loggedInUser = userRepository.findUserByEmail(loginDTO.getEmail()).get();
 
         return new ApiResponse<>("success", LocalDateTime.now(), new PrincipalDto(loggedInUser.getId() , loggedInUser.getName() ,  loggedInUser.getEmail(), loggedInUser.getRole(), jwtUtil.generateToken(loginDTO.getEmail())));
-
-    }
-
-
-        return new ApiResponse<>("success" , LocalDateTime.now() , new PrincipalDto( loggedInUser.getId() , loggedInUser.getName() ,  loggedInUser.getEmail(), loggedInUser.getRole(), jwtUtil.generateToken(loginDTO.getEmail())));
-
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.decagon.rewardyourteacherapi11bjavapodf2.controller;
+package com.decagon.rewardyourteacherapi11bjavapodf2.controllers;
 
 import com.decagon.rewardyourteacherapi11bjavapodf2.security.CustomUserDetails;
 import com.decagon.rewardyourteacherapi11bjavapodf2.service.CurrentUser;
