@@ -4,6 +4,7 @@ import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserNotFoundExcep
 import com.decagon.rewardyourteacherapi11bjavapodf2.response.ApiResponse;
 import com.decagon.rewardyourteacherapi11bjavapodf2.response.UserRegistrationResponse;
 import com.decagon.rewardyourteacherapi11bjavapodf2.service.AuthService;
+import com.decagon.rewardyourteacherapi11bjavapodf2.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ import java.io.IOException;
 public class AuthController {
 
     private final AuthService authService;
-
+    private final UserService userService;
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO authRequest) throws UserNotFoundException {
         ApiResponse<?> apiResponse = authService.login(authRequest);
@@ -41,5 +42,19 @@ public class AuthController {
         UserRegistrationResponse userRegistrationResponse = authService.registerTeacher(teacherDto);
         return new ResponseEntity<>(userRegistrationResponse, HttpStatus.CREATED);
     }
+
+    @PostMapping("/register/teacher/callback")
+    public ResponseEntity<ApiResponse> getTeacherInfoFromGoogle(@RequestBody com.decagon.rewardyourteacherapi11bjavapodf2.pojos.OAuth2UserInfo principal){
+        ApiResponse apiResponse = userService.getOAuth2Teacher(principal);
+        return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
+    }
+
+
+    @PostMapping("/register/student/callback")
+    public ResponseEntity<ApiResponse> registerStudent(@RequestBody com.decagon.rewardyourteacherapi11bjavapodf2.pojos.OAuth2UserInfo principal){
+        ApiResponse apiResponse = userService.registerOAuth2Student(principal);
+        return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
+    }
+
 
 }
