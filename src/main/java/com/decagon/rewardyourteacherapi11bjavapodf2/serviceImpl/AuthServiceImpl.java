@@ -89,7 +89,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public ApiResponse<PrincipalDto> login(LoginDTO loginDTO) {
+    public ApiResponse<PrincipalDto> loginUser(LoginDTO loginDTO) {
         Authentication authenticate;
         try {
             authenticate = authenticationManager.authenticate(
@@ -104,7 +104,6 @@ public class AuthServiceImpl implements AuthService {
         return new ApiResponse<>("success" , LocalDateTime.now() , new PrincipalDto( loggedInUser.getId() , loggedInUser.getName() ,  loggedInUser.getEmail(), loggedInUser.getRole(), jwtUtil.generateToken(loginDTO.getEmail())));
 
     }
-
     @Override
     public ApiResponse<PrincipalDto> authenticateOAuth2User(OAuth2UserInfo auth2UserInfo) {
         User user = userRepository.findUserByEmail(auth2UserInfo.getEmail()).orElseThrow(() ->

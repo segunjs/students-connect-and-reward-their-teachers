@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping(value = "/api/v1")
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO authRequest) throws UserNotFoundException {
-        ApiResponse<?> apiResponse = authService.login(authRequest);
+        ApiResponse<?> apiResponse = authService.loginUser(authRequest);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
     @PostMapping("/oauth2/login/callback")
