@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeacherRegistrationDto extends UserDto{
+
     private String yearsOfService;
     private List<String> subjectList;
     private SchoolType schoolType;
