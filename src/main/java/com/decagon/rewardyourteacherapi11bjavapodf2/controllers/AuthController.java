@@ -28,5 +28,16 @@ public class AuthController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/register/student")
+    public ResponseEntity<UserRegistrationResponse> registerUser(@RequestBody UserDto userDto) {
+        UserRegistrationResponse userRegistrationResponse = authService.registerUser(userDto);
+        return new ResponseEntity<>(userRegistrationResponse, HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/register/teacher")
+    public ResponseEntity<UserRegistrationResponse> registerTeacher(@RequestBody TeacherRegistrationDto teacherDto) throws IOException {
+        UserRegistrationResponse userRegistrationResponse = authService.registerTeacher(teacherDto);
+        return new ResponseEntity<>(userRegistrationResponse, HttpStatus.CREATED);
+    }
 
 }
