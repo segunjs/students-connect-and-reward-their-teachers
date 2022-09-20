@@ -22,7 +22,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO authRequest) throws UserNotFoundException {
-        ApiResponse<?> apiResponse = authService.loginUser(authRequest);
+        ApiResponse<?> apiResponse = authService.login(authRequest);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
     @PostMapping("/oauth2/login/callback")
