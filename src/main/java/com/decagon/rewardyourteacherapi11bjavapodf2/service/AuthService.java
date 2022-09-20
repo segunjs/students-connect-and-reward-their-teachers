@@ -10,6 +10,9 @@ import java.io.IOException;
 
 public interface AuthService {
 
+    UserRegistrationResponse registerUser(UserDto userDto);
+    UserRegistrationResponse registerTeacher(TeacherRegistrationDto teacherDto) throws IOException;
+
     ApiResponse<PrincipalDto> login(LoginDTO loginDTO);
 
     ApiResponse<PrincipalDto> authenticateOAuth2User(OAuth2UserInfo auth2UserInfo);
