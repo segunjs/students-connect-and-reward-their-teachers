@@ -42,8 +42,6 @@ public class AuthServiceImpl implements AuthService {
 
     private final PasswordEncoder passwordEncoder;
 
-
-
     private final JwtUtil jwtUtil;
 
     private final AuthenticationManager authenticationManager;
@@ -90,12 +88,7 @@ public class AuthServiceImpl implements AuthService {
         }else{
             throw new UserAlreadyExistException("User already exist");
         }
-
     }
-
-
-
-
 
     @Override
     public ApiResponse<PrincipalDto> loginUser(LoginDTO loginDTO) {
