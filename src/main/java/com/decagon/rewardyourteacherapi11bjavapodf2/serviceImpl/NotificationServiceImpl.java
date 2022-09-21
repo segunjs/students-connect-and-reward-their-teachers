@@ -61,7 +61,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     public Notification receiveFundsNotification(Long receiverId, BigDecimal amount){
         User teacher = userRepository.findById(receiverId).get();
-        String message = "You received " + amount + " from ";
+        String message = "You received ₦" + amount + " from ";
         Notification notification = new Notification();
         notification.setNotificationType(NotificationType.RECEIVE_FUNDS);
         notification.setUser(teacher);
@@ -71,7 +71,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     public Notification sendFundsNotification(Long senderId, BigDecimal amount){
         User student = userRepository.findById(senderId).get();
-        String message = "You sent " + amount + " to ";
+        String message = "You sent ₦" + amount + " to ";
         Notification notification = new Notification();
         notification.setNotificationType(NotificationType.TRANSFER_FUNDS);
         notification.setUser(student);
