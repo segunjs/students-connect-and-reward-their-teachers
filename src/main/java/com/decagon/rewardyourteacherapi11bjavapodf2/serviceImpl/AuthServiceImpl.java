@@ -1,15 +1,8 @@
 package com.decagon.rewardyourteacherapi11bjavapodf2.serviceImpl;
 
-
-import com.decagon.rewardyourteacherapi11bjavapodf2.dto.LoginDTO;
-import com.decagon.rewardyourteacherapi11bjavapodf2.dto.PrincipalDto;
-import com.decagon.rewardyourteacherapi11bjavapodf2.dto.TeacherRegistrationDto;
-import com.decagon.rewardyourteacherapi11bjavapodf2.dto.UserDto;
-import com.decagon.rewardyourteacherapi11bjavapodf2.enums.Role;
-
 import com.decagon.rewardyourteacherapi11bjavapodf2.dto.*;
+import com.decagon.rewardyourteacherapi11bjavapodf2.enums.Role;
 import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.OAuth2AuthenticationException;
-
 import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserAlreadyExistException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.exceptions.UserNotFoundException;
 import com.decagon.rewardyourteacherapi11bjavapodf2.model.Subject;
@@ -42,11 +35,15 @@ import java.util.Optional;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+
     private final SubjectRepository subjectRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final JwtUtil jwtUtil;
+
     private final AuthenticationManager authenticationManager;
+
 
     @Override
     public UserRegistrationResponse registerUser(UserDto userDto) {
@@ -92,8 +89,12 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public ApiResponse<PrincipalDto> login(LoginDTO loginDTO) {
+    public ApiResponse<PrincipalDto> loginUser(LoginDTO loginDTO) {
+        return null;
+    }
 
+    @Override
+    public ApiResponse<PrincipalDto> login(LoginDTO loginDTO) {
         Authentication authenticate;
         try {
             authenticate = authenticationManager.authenticate(
@@ -105,10 +106,9 @@ public class AuthServiceImpl implements AuthService {
         }
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         User loggedInUser = userRepository.findUserByEmail(loginDTO.getEmail()).get();
+        return new ApiResponse<>("success" , LocalDateTime.now() , new PrincipalDto( loggedInUser.getId() , loggedInUser.getName() ,  loggedInUser.getEmail(), loggedInUser.getRole(), jwtUtil.generateToken(loginDTO.getEmail())));
 
-        return new ApiResponse<>("success", LocalDateTime.now(), new PrincipalDto(loggedInUser.getId() , loggedInUser.getName() ,  loggedInUser.getEmail(), loggedInUser.getRole(), jwtUtil.generateToken(loginDTO.getEmail())));
     }
-
     @Override
     public ApiResponse<PrincipalDto> authenticateOAuth2User(OAuth2UserInfo auth2UserInfo) {
         User user = userRepository.findUserByEmail(auth2UserInfo.getEmail()).orElseThrow(() ->
