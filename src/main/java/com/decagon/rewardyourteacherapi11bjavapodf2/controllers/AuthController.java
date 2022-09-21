@@ -44,14 +44,14 @@ public class AuthController {
     }
 
     @PostMapping("/register/teacher/callback")
-    public ResponseEntity<ApiResponse> getTeacherInfoFromGoogle(@RequestBody com.decagon.rewardyourteacherapi11bjavapodf2.pojos.OAuth2UserInfo principal){
+    public ResponseEntity<ApiResponse> getTeacherInfoFromGoogle(@RequestBody OAuth2UserInfo principal){
         ApiResponse apiResponse = userService.getOAuth2Teacher(principal);
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 
 
     @PostMapping("/register/student/callback")
-    public ResponseEntity<ApiResponse> registerStudent(@RequestBody com.decagon.rewardyourteacherapi11bjavapodf2.pojos.OAuth2UserInfo principal){
+    public ResponseEntity<ApiResponse> registerStudent(@RequestBody OAuth2UserInfo principal){
         ApiResponse apiResponse = userService.registerOAuth2Student(principal);
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
